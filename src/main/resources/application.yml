@@ -1,0 +1,69 @@
+spring:
+  datasource:
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiaobiao?characterEncoding=utf8&serverTimezone=Hongkong
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+#    druid:
+#      stat-view-servlet:
+#        enabled: true
+#        login-username: druid
+#        login-password: 123
+#        url-pattern: /druid/*     #处理所有命名空间为/druid的请求
+#      filter:
+#        stat:
+#          enabled: true           #sql监控
+#        wall:
+#          enabled: true           #sql防火墙监控
+#      web-stat-filter:            #web 监控
+#        enabled: true
+#        url-pattern: /*           #监控所有请求
+#        exclusions: "*.js,*.jpg,*.png,*.css,/druid/*"    #默认设置了
+#        profile-enable: true                #开启跟踪单个uri的sql执行调用过程
+#        principal-session-name: loginUser
+#        session-stat-enable: true           #开启session监控
+  resources:
+    static-locations: classpath:/,classpath:/HTML/
+logging:
+  level:
+    com:
+      lyh:
+        xiaobiao:
+          mapper: trace
+    org:
+      springframework:
+        cache: trace
+server:
+  servlet:
+    context-path: /xiaobiao
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+#    object-wrapper-factory: com.lyh.xiaobiao.util.MapWrapperFactory
+
+kaptcha:
+  height: 44
+  width: 125
+  content:
+    length: 4
+    source: 1234567890
+    space: 2
+  font:
+    color: black
+    size: 30
+  background-color:
+    from: lightGray
+    to: white
+  border:
+    enabled: true
+    color: black
+    thickness: 1
