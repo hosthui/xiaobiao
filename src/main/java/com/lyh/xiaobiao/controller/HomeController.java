@@ -1,11 +1,7 @@
 package com.lyh.xiaobiao.controller;
 
 
-import com.lyh.xiaobiao.dao.ArticleDao;
-import com.lyh.xiaobiao.entity.Article;
-import com.lyh.xiaobiao.entity.Meeting;
 import com.lyh.xiaobiao.entity.Result;
-import com.lyh.xiaobiao.entity.User;
 import com.lyh.xiaobiao.service.ArticleService;
 import com.lyh.xiaobiao.service.MeetingService;
 import com.lyh.xiaobiao.service.UserService;
@@ -13,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +28,11 @@ public class HomeController {
 	@Autowired
 	ArticleService articleService;
 	
+	
+	@RequestMapping
+	public ModelAndView toHome(){
+		return new ModelAndView("html/home.html");
+	}
 	
 	@RequestMapping("selectAll")
 	public Result selectall(@RequestBody String[] dates){

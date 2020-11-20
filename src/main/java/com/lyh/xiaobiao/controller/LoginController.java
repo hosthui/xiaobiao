@@ -30,7 +30,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/loginIn")
-	public Result loginin(@RequestBody Map<String,String> logmsg){
+	public Result loginin(@RequestBody Map<String,String> logmsg,
+	                      HttpSession session){
 		
 		if (kaptcha.validate(logmsg.get("code"))){
 			User user = new User();
@@ -38,9 +39,10 @@ public class LoginController {
 			user.setPassword(logmsg.get("password"));
 			User loginUser = userService.selectOne(user);
 			if ( loginUser!=null ){
-				User logintime = new User();
-				logintime.setLoginTime(new Date());
-				userService.update(logintime);
+				loginUser.setLoginTime(new Date());
+				userService.update(loginUser);
+				loginUser.setPassword(null);
+				session.setAttribute("loginuser",loginUser);
 				return new Result(true,"登录成功");
 			}
 		}

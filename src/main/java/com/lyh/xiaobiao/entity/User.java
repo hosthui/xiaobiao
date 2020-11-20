@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -36,8 +37,21 @@ public class User implements Serializable {
     private String isSecret;
     private String deptName;
     private Long deptId;
+    @Transient
+    private String userFocusId;
 
-    public Long getId() {
+    
+	
+	
+	public String getUserFocusId() {
+		return userFocusId;
+	}
+	
+	public void setUserFocusId(String userFocusId) {
+		this.userFocusId = userFocusId;
+	}
+	
+	public Long getId() {
         return id;
     }
 
@@ -180,4 +194,6 @@ public class User implements Serializable {
     public void setDeptId(Long deptId) {
         this.deptId = deptId;
     }
+	
+	
 }
