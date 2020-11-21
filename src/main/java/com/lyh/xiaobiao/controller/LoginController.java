@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -64,7 +65,7 @@ public class LoginController {
 					cookie.setPath("/");
 					response.addCookie(cookie);
 				}
-				return new Result(true,"登录成功");
+				return new Result(true,"登录成功",loginUser);
 			}
 		}
 		return new Result(false,"登录失败,用户名或密码错误");
@@ -105,5 +106,15 @@ public class LoginController {
 			session.removeAttribute("verifyCode");
 			return new Result(false,"验证码错误，请重新发送");
 		}
+	}
+	
+	@RequestMapping("/loginout")
+	public Result loginout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginuser");
+		Cookie newCookie=new Cookie("cookieuser",null);
+		String contextPath = request.getContextPath();
+//		return new ModelAndView(contextPath+"/index.html");
+		return new Result(true,"注销成功");
 	}
 }

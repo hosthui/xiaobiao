@@ -17,7 +17,7 @@ let vm = new Vue({
                 method:"post",
                 data:{username:this.username,password:this.password,code:this.code,rem:this.rem}
             }).then(response=>{
-                let result=response.data.obj
+                let result=response.data.data
                 if (response.data.flag){
                     let userjson = JSON.stringify(result);
                     sessionStorage.setItem("loginsession",userjson);
