@@ -36,26 +36,25 @@ public class HomeController {
 	
 	@RequestMapping("selectAll")
 	public Result selectall(@RequestBody String[] dates){
-		List<Long> ArticleCount=new ArrayList<>();
-		List<Long> MeetingCount=new ArrayList<>();
-		List<Long> UserCount=new ArrayList<>();
-		Map<String, List<Long>> AllCount=new HashMap<>();
-		Calendar instance = Calendar.getInstance();
-		int year = instance.get(Calendar.YEAR);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-			try {
-				for ( String date : dates ) {
-					Date parse = simpleDateFormat.parse(year + "." + date);
-					UserCount.add(userService.countUserByDate(parse));
-					MeetingCount.add(meetingService.countMeetingByDate(parse));
-					ArticleCount.add(articleService.countArticleByDate(parse));
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			AllCount.put("user",UserCount);
-			AllCount.put("meeting",MeetingCount);
-			AllCount.put("article",ArticleCount);
+		Map<String, List> AllCount=new HashMap<>();
+//		Calendar instance = Calendar.getInstance();
+//		int year = instance.get(Calendar.YEAR);
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd");
+//			try {
+//				for ( String date : dates ) {
+//					Date parse = simpleDateFormat.parse(year + "." + date);
+//					UserCount.add(userService.countUserByDate(parse));
+//					MeetingCount.add(meetingService.countMeetingByDate(parse));
+//					ArticleCount.add(articleService.countArticleByDate(parse));
+//				}
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//			}
+		Map<String, List> stringListMap = userService.countUserByDate();
+		AllCount.put("user",stringListMap.get("userCount"));
+		AllCount.put("date",stringListMap.get("Date"));
+			AllCount.put("meeting",meetingService.countMeetingByDate());
+			AllCount.put("article",articleService.countArticleByDate());
 		return new Result(true,"查询成功",AllCount);
 	}
 }

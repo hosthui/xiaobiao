@@ -1,7 +1,8 @@
 package com.lyh.xiaobiao.service;
 
 import java.util.Date;
+import java.util.List;
 
 public interface MeetingService {
-	long countMeetingByDate(Date date);
+	List<Long> countMeetingByDate();
 }

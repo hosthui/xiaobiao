@@ -5,6 +5,7 @@ import com.lyh.xiaobiao.entity.User;
 import org.springframework.data.domain.Page;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -18,5 +19,7 @@ public interface UserService {
 	
 	void update(User user);
 	
-	long countUserByDate(Date date);
+	Map<String,List> countUserByDate();
+	
+	int upfocous(Map<String, Long[]> map, Long id);
 }

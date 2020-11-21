@@ -3,7 +3,8 @@ let vm = new Vue({
     data: {
         page: {},       //初始化对象     vue建议声明对象同时进行初始化，避免undefinded
         username:"",
-        focusId:[]
+        focusId:[],
+        focusIds:[]
     },
     methods: {
         selectAll: function (pageNum = 1, pageSize = 5) {
@@ -17,6 +18,7 @@ let vm = new Vue({
                         for (let j = 0; j < this.focusId.length; j++) {
                             if (pages.content[i].id==this.focusId[j].userFocusId){
                                 pages.content[i].checke=true
+                                this.focusIds.push(this.focusId[j].userFocusId);
                                 break;
                             }else {
                                 pages.content[i].checke=false
@@ -49,7 +51,6 @@ let vm = new Vue({
         },
         doUpdate: function () {
             let newfocusId=[];
-            debugger
             for (let i = 0; i <this.page.content.length; i++) {
                 if (this.page.content[i].checke==true){
                     newfocusId.push(this.page.content[i].id)
@@ -57,7 +58,7 @@ let vm = new Vue({
                 axios({
                     url: "user/doupdate",
                     method: "put",
-                    data: {"newfocus":newfocusId,"focusId":this.focusId}
+                    data: {"newfocus":newfocusId,"focusId":this.focusIds}
                 }).then(response => {
 
                 }).catch(error => {
@@ -88,13 +89,14 @@ let vm = new Vue({
         }
     },
     created: function () {
+        console.group('created 创建状态===============》');
         this.selectAll();
     },
-    beforeDestroy:function () {
-        console.log('beforeDestroy 销毁前状态===============》');
-        this.doUpdate()
+    mounted:function () {
+        window.addEventListener('beforeunload', e => this.doUpdate(e))
+        // window.addEventListener('unload', e => this.unloadHandler(e))
     },
-    beforeRouteLeave:function () {
-
+    destroyed:function () {
+        window.removeEventListener('beforeunload', e => this.doUpdate(e))
     }
 });

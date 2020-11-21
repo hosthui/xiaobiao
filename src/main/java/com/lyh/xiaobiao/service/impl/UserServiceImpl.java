@@ -1,10 +1,9 @@
 package com.lyh.xiaobiao.service.impl;
 
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lyh.xiaobiao.dao.UserDao;
-import com.lyh.xiaobiao.dao.UserFocusdao;
+import com.lyh.xiaobiao.dao.UserFocusTk;
+import com.lyh.xiaobiao.dao.UserFocusDao;
 import com.lyh.xiaobiao.dao.UserTk;
 import com.lyh.xiaobiao.entity.User;
 import com.lyh.xiaobiao.entity.UserFocus;
@@ -15,22 +14,28 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
-	
-	@Autowired
-	UserDao userDao;
 	
 	@Autowired
 	UserTk userTk;
 	
 	@Autowired
-	UserFocusdao userFocusdao;
+	UserDao userDao;
+	
+	@Autowired
+	UserFocusTk userFocusTk;
+	
+	@Autowired
+	UserFocusDao userFocusdao;
 	
 	
 	@Override
@@ -90,21 +95,52 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public long countUserByDate(Date date){
-		Specification<User> specification = new Specification<User>() {
-			@Override
-			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-				Expression<Date> register_time = root.get("registerTime").as(Date.class);
-				Calendar calendar = new GregorianCalendar();
-				calendar.setTime(date);
-				calendar.add(Calendar.DATE,1);
-				Date time = calendar.getTime();
-				Predicate between = criteriaBuilder.between(register_time, date, time);
-				return between;
+	public Map<String,List> countUserByDate(){
+//		Specification<User> specification = new Specification<User>() {
+//			@Override
+//			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+//				Expression<Date> register_time = root.get("registerTime").as(Date.class);
+//				Calendar calendar = new GregorianCalendar();
+//				calendar.setTime(date);
+//				calendar.add(Calendar.DATE,1);
+//				Date time = calendar.getTime();
+//				Predicate between = criteriaBuilder.between(register_time, date, time);
+//				return between;
+//			}
+//		};
+//		long count = userDao.count(specification);
+		List<String> date=new ArrayList<>();
+		List<Long> userCount=new ArrayList<>();
+		Map<String,List> rmap=new HashMap<>();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd");
+		List<Map<String, Object>> maps = userTk.SelectCount();
+		Collections.reverse(maps);
+		for ( Map<String, Object> map : maps ) {
+			Date date1 = (Date)map.get("click_date");
+			String format = simpleDateFormat.format(date1);
+			date.add(format);
+			if ( map.get("count")!=null ){
+				userCount.add((Long)map.get("count"));
+			}else {
+				userCount.add(0L);
 			}
-		};
-		long count = userDao.count(specification);
-		return  count;
+		}
+		rmap.put("Date",date);
+		rmap.put("userCount",userCount);
+		return  rmap;
+	}
+	
+	@Override
+	public int upfocous(Map<String, Long[]> map, Long id){
+		
+		if ( map.containsKey("newfocus")&&map.get("newfocus")!=null&&map.containsKey("focusId")&&map.get("focusId")!=null ){
+		if ( map.get("newfocus").length==map.get("focusId").length&&Arrays.equals(map.get("newfocus"),map.get("focusId"))){
+			return 1;
+			}
+		userFocusdao.delbyid(id);
+			userFocusTk.insertBatch(map.get("newfocus"),id);
+		}
+		return 1;
 	}
 	
 }

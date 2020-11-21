@@ -1,6 +1,7 @@
 package com.lyh.xiaobiao.service.impl;
 
 import com.lyh.xiaobiao.dao.ArticleDao;
+import com.lyh.xiaobiao.dao.ArticleTk;
 import com.lyh.xiaobiao.entity.Article;
 import com.lyh.xiaobiao.entity.Meeting;
 import com.lyh.xiaobiao.service.ArticleService;
@@ -9,9 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -20,22 +19,22 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	ArticleDao articleDao;
 	
+	@Autowired
+	ArticleTk articleTk;
+	
 	
 	@Override
-	public long countArticleByDate(Date date){
-		Specification<Article> specification = new Specification<Article>() {
-			@Override
-			public Predicate toPredicate(Root<Article> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-				Expression<Date> publishDate = root.get("publishDate").as(Date.class);
-				Calendar calendar = new GregorianCalendar();
-				calendar.setTime(date);
-				calendar.add(Calendar.DATE,1);
-				Date time = calendar.getTime();
-				Predicate between = criteriaBuilder.between(publishDate, date, time);
-				return between;
+	public List<Long> countArticleByDate(){
+		List<Long> ArticleCount=new ArrayList<>();
+		List<Map<String, Object>> maps = articleTk.SelectCount();
+		Collections.reverse(maps);
+		for ( Map<String, Object> map : maps ) {
+			if ( map.get("count")!=null ){
+				ArticleCount.add((Long)map.get("count"));
+			}else {
+				ArticleCount.add(0L);
 			}
-		};
-		long count = articleDao.count(specification);
-		return  count;
+		}
+		return  ArticleCount;
 	}
 }

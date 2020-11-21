@@ -33,9 +33,10 @@ public class UserController {
 		return new Result(true,"查询成功",userService.selectPage(pageNum,pageSize,username,user.getId()));
 	}
 	
-	@RequestMapping("doupdate")
-	public Result doupdate(@RequestBody Map<String,Long[]> map){
-		return new Result();
+	@RequestMapping(value = "doupdate",method = RequestMethod.PUT)
+	public Result doupdate(@RequestBody Map<String,Long[]> map,HttpSession session){
+		User user = (User)session.getAttribute("loginuser");
+		return new Result(true,"更新成功",userService.upfocous(map,user.getId()));
 	}
 
 }

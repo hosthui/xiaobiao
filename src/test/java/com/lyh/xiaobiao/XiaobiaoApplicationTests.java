@@ -1,21 +1,13 @@
 package com.lyh.xiaobiao;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.github.pagehelper.PageInfo;
-import com.lyh.xiaobiao.dao.UserFocusdao;
+import com.lyh.xiaobiao.dao.UserFocusDao;
 import com.lyh.xiaobiao.dao.UserTk;
-import com.lyh.xiaobiao.entity.User;
-import com.lyh.xiaobiao.entity.UserFocus;
 import com.lyh.xiaobiao.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.*;
 
 @SpringBootTest
 class XiaobiaoApplicationTests {
@@ -24,12 +16,15 @@ class XiaobiaoApplicationTests {
 	UserService userService;
 
 	@Autowired
-	UserFocusdao userFocusdao;
+	UserFocusDao userFocusdao;
+	
+	@Autowired
+	UserTk userTk;
 	
 	@Test
 	void contextLoads() {
-		Map<String, Object> stringObjectMap = userService.selectPage(1, 5, "", 1L);
-		System.out.println("123");
+//		Map<String, Object> stringObjectMap = userService.selectPage(1, 5, "", 1L);
+//		System.out.println("123");
 //		List<UserFocus> findfocous = userFocusdao.findfocous(1L);
 //		for ( UserFocus userFocus : findfocous ) {
 //			System.out.println(userFocus);
@@ -45,7 +40,9 @@ class XiaobiaoApplicationTests {
 //			System.out.println(user);
 //		}
 		
-		
+		List<Map<String,Object>> stringMap = userTk.SelectCount();
+		Collections.reverse(stringMap);
+		System.out.println("123");
 	}
 
 }
