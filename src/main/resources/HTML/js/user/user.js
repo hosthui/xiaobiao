@@ -14,6 +14,7 @@ let vm = new Vue({
             }).then(response => {  //省略function关键字  自动传递上下文中的this
                     let pages= response.data.data.page;
                     this.focusId=response.data.data.focous;
+                    this.focusIds=[];
                     for (let i = 0; i <pages.content.length; i++) {
                         for (let j = 0; j < this.focusId.length; j++) {
                             if (pages.content[i].id==this.focusId[j].userFocusId){
@@ -49,7 +50,9 @@ let vm = new Vue({
                 layer.msg(error.message)
             })
         },
-        doUpdate: function () {
+        doUpdate: function (pageNum,pageSize) {
+            debugger;
+
             let newfocusId=[];
             for (let i = 0; i <this.page.content.length; i++) {
                 if (this.page.content[i].checke==true){
@@ -60,7 +63,7 @@ let vm = new Vue({
                     method: "put",
                     data: {"newfocus":newfocusId,"focusId":this.focusIds}
                 }).then(response => {
-
+                    this.selectAll(pageNum,pageSize)
                 }).catch(error => {
                     layer.msg(error.message)
                 })
