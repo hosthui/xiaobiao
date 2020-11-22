@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="/xiaobiao/">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+		<!-- Font Awesome CSS-->
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<!-- Custom Font Icons CSS-->
+		<link rel="stylesheet" href="css/font.css">
+		<!-- theme stylesheet-->
+		<link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+		<!-- Custom stylesheet - for your changes-->
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/layer.css">
+		<title>我的收藏</title>
+
+	</head>
+	<body>
+		<div id="app">
+			<header class="header">
+				<div id="navbar">
+
+				</div>
+			</header>
+
+			<div class="d-flex align-items-stretch">
+				<!-- Sidebar Navigation-->
+				<nav id="sidebar">
+
+
+				</nav>
+				<!-- Sidebar Navigation end-->
+				<div class="page-content">
+					<div class="page-header">
+						<div class="container-fluid">
+							<h2 class="h5 no-margin-bottom">我收藏的文章</h2>
+						</div>
+					</div>
+
+					<section class="no-padding-bottom">
+
+						<div class="list-group myList">
+							<!--搜索文章的条件-->
+							<div class="myTitle">
+								<form class="form-inline">
+									<div class="form-group">
+										<label for="inlineFormInput" class="sr-only">Name</label>
+										<input id="inlineFormInput" type="text" placeholder="按标题名字查找" class="mr-sm-3 form-control" v-model="articlename">
+									</div>
+									<div class="form-group">
+										<input type="button" value="查询" class="btn btn-primary" @click="selectAll()">
+									</div>
+								</form>
+
+								<!--<input id = "addArt" type="submit" value="发布文章" class="btn btn-primary">-->
+
+							</div>
+
+							<ul>
+
+								<li class="list-group-item" v-for="article in pageInfo.list">
+
+									<a href="article/detail" @click="toDetail(article)">{{article.title}}</a>
+									<p class="h6"><strong>作者：</strong>{{article.publishRealName}}</p>
+									<p class="h6"><strong>时间：</strong>{{article.publishDate}}</p>
+									<p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis">
+										{{article.content}}
+									</p>
+								</li>
+
+							</ul>
+
+							<nav class="text-center" aria-label="Page navigation">
+								<ul class="pagination">
+									<li v-if="pageInfo.hasPreviousPage">
+										<a  style="cursor:default;" aria-label="Previous" @click="selectAll(pageInfo.prePage,pageInfo.pageSize)">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li v-else>
+										<a style="cursor:default;" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li :class="pageInfo.pageNum==p?'active':''" v-for="p in pageInfo.navigatepageNums"><a style="cursor:default;" @click="selectAll(p,pageInfoSize)">{{p}}</a></li>
+									<li v-if="pageInfo.hasNextPage">
+										<a style="cursor:default;" aria-label="Next" @click="selectAll(pageInfo.nextPage,pageInfo.pageSize)">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+									<li v-else>
+										<a style="cursor:default;" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</section>
+
+					<footer class="footer">
+						<div class="footer__block block no-margin-bottom">
+							<div class="container-fluid text-center">
+								<p class="no-margin-bottom">Copyright &copy; 2019.Company <a href="#">东方标准</a></p>
+							</div>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</div>
+		<!-- JavaScript files-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/popper.js/umd/popper.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+		<script src="vendor/chart.js/Chart.min.js"></script>
+		<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+		<script src="js/charts-home.js"></script>
+		<script src="js/front.js"></script>
+		<script src="js/custom.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/vue-2.6.11.js"></script>
+		<script src="js/axios-0.19.2.min.js"></script>
+		<script src="js/jquery-cookie-1.4.1.js"></script>
+		<script src="js/article/article_collect.js"></script>
+		<script>
+			$(function(){
+				$("#sidebar").load("main/sidebar");
+				$("#navbar").load("main/navbar");
+			});
+		</script>
+	</body>
+</html>

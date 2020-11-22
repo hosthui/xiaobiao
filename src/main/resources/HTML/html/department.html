@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="/xiaobiao/">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+		<!-- Font Awesome CSS-->
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<!-- Custom Font Icons CSS-->
+		<link rel="stylesheet" href="css/font.css">
+		<!-- theme stylesheet-->
+		<link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+		<!-- Custom stylesheet - for your changes-->
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/layer.css">
+		<title>部门</title>
+
+	</head>
+	<body>
+		<div id="app">
+			<header class="header">
+				<div id="navbar">
+
+				</div>
+			</header>
+
+			<div class="d-flex align-items-stretch">
+				<!-- Sidebar Navigation-->
+				<nav id="sidebar"><!--class="shrinked"-->
+
+
+				</nav>
+				<!-- Sidebar Navigation end-->
+				<div class="page-content"><!--class="active"-->
+					<div class="page-header">
+						<div class="container-fluid">
+							<h2 class="h5 no-margin-bottom">全部部门</h2>
+						</div>
+					</div>
+					<section class="no-padding-bottom">
+
+						<div class="list-group subject">
+							<div class="list-group-item">
+								<a href="#deptDetail1" data-toggle="collapse">研发部 &nbsp;3人</a>
+								<div id="deptDetail1" class="collapse deptDetail">
+									<ul>
+										<li>
+											<a href="#">小东</a>
+										</li>
+										<li>
+											<a href="#">小方</a>
+										</li>
+										<li>
+											<a href="#">小标</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="list-group-item">
+								<a href="#deptDetail2" data-toggle="collapse">行政部 &nbsp;2人</a>
+								<div id="deptDetail2" class="collapse deptDetail">
+									<ul>
+										<li>
+											<a href="#">小标</a>
+										</li>
+										<li>
+											<a href="#">小准</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="list-group-item">
+								<a href="#deptDetail3" data-toggle="collapse">总裁办公室 &nbsp;1人</a>
+								<div id="deptDetail3" class="collapse deptDetail">
+									<ul>
+										<li>
+											<a href="#">东方标准</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<footer class="footer">
+						<div class="footer__block block no-margin-bottom">
+							<div class="container-fluid text-center">
+								<p class="no-margin-bottom">Copyright &copy; 2019.Company <a href="#">东方标准</a></p>
+							</div>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</div>
+		<!-- JavaScript files-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/popper.js/umd/popper.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+		<script src="vendor/chart.js/Chart.min.js"></script>
+		<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+		<script src="js/charts-home.js"></script>
+		<script src="js/front.js"></script>
+		<script src="js/custom.js"></script>
+		<script src="bootstrap/js/bootstrap-collapse.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/vue-2.6.11.js"></script>
+		<script src="js/axios-0.19.2.min.js"></script>
+		<script src="js/jquery-cookie-1.4.1.js"></script>
+		<script src="js/department/department.js"></script>
+		<script>
+			$(function(){
+				$("#sidebar").load("main/sidebar");
+				$("#navbar").load("main/navbar");
+			});
+		</script>
+	</body>
+</html>
