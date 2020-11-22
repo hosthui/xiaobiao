@@ -3,7 +3,11 @@ spring:
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/xiaobiao?characterEncoding=utf8&serverTimezone=Hongkong
+<<<<<<< HEAD
     password: 252090
+=======
+    password: root
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
     type: com.alibaba.druid.pool.DruidDataSource
   jpa:
     show-sql: true

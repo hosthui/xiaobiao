@@ -12,6 +12,7 @@ public class UserFocusTkSqlProvider {
 		buffer.deleteCharAt(buffer.length()-1);
 		return buffer.toString();
 	}
+<<<<<<< HEAD
 
 	public String delsql(@Param("focusIds") Long[] focusIds,@Param("UserId") Long UserId){
 		StringBuffer buffer = new StringBuffer(" DELETE FROM userfocus WHERE user_id=#{UserId} and user_focus_id in ( ");
@@ -22,4 +23,6 @@ public class UserFocusTkSqlProvider {
 		buffer.append("  ) ");
 		return buffer.toString();
 	}
+=======
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 }

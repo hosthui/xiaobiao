@@ -40,10 +40,16 @@ class XiaobiaoApplicationTests {
 //			System.out.println(user);
 //		}
 		
+<<<<<<< HEAD
 //		List<Map<String,Object>> stringMap = userTk.SelectCount();
 //		Collections.reverse(stringMap);
 //		System.out.println("123");
 
+=======
+		List<Map<String,Object>> stringMap = userTk.SelectCount();
+		Collections.reverse(stringMap);
+		System.out.println("123");
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 	}
 
 }

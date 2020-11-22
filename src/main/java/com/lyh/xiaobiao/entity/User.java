@@ -38,6 +38,7 @@ public class User implements Serializable {
     private String deptName;
     private Long deptId;
     @Transient
+<<<<<<< HEAD
     private Long userFans;
 
     public Long getUserFans() {
@@ -49,6 +50,22 @@ public class User implements Serializable {
     }
 
     public Long getId() {
+=======
+    private String userFocusId;
+
+    
+	
+	
+	public String getUserFocusId() {
+		return userFocusId;
+	}
+	
+	public void setUserFocusId(String userFocusId) {
+		this.userFocusId = userFocusId;
+	}
+	
+	public Long getId() {
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
         return id;
     }
 

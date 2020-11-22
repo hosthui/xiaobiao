@@ -9,10 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
+<<<<<<< HEAD
 
 	Map<String,Object> selectPage(int pageNum, int pageSize, String userName,
 	                        Long id);
 
+=======
+	
+	Map<String,Object> selectPage(int pageNum, int pageSize, String userName,
+	                        Long id);
+	
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 	User selectOne(User user);
 	
 	void insertUser(User user);

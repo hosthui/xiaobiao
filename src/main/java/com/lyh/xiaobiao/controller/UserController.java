@@ -32,7 +32,11 @@ public class UserController {
 		User user = (User)session.getAttribute("loginuser");
 		return new Result(true,"查询成功",userService.selectPage(pageNum,pageSize,username,user.getId()));
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 	@RequestMapping(value = "doupdate",method = RequestMethod.PUT)
 	public Result doupdate(@RequestBody Map<String,Long[]> map,HttpSession session){
 		User user = (User)session.getAttribute("loginuser");

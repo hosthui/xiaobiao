@@ -1,8 +1,11 @@
 package com.lyh.xiaobiao.service.impl;
 
 
+<<<<<<< HEAD
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+=======
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 import com.lyh.xiaobiao.dao.UserDao;
 import com.lyh.xiaobiao.dao.UserFocusTk;
 import com.lyh.xiaobiao.dao.UserFocusDao;
@@ -43,6 +46,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Map<String,Object> selectPage(int pageNum, int pageSize,
 	                                 String userName,Long id){
+<<<<<<< HEAD
 		PageHelper.startPage(pageNum,pageSize);
 		Map<String,Object> map=new HashMap<>();
 //		Specification<User> specification = new Specification<User>() {
@@ -68,12 +72,41 @@ public class UserServiceImpl implements UserService {
 		List<UserFocus> findfocous = userFocusdao.findfocous(id);
 		map.put("page",userPageInfo);
 		 map.put("focous", findfocous);
+=======
+		Map<String,Object> map=new HashMap<>();
+		Specification<User> specification = new Specification<User>() {
+			@Override
+			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+				Expression<String> username = root.get("username").as(String.class);
+				Expression<Long> id1 = root.get("id").as(Long.class);
+				List<Predicate> predicates=new ArrayList<>();
+				if ( !StringUtils.isEmpty(userName) ){
+					Predicate like = criteriaBuilder.like(username, '%' + userName + '%');
+					predicates.add(like);
+				}
+				if ( id!=null ){
+					Predicate equal = criteriaBuilder.notEqual(id1,id);
+					predicates.add(equal);
+				}
+				return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+			}
+		};
+		List<UserFocus> findfocous = userFocusdao.findfocous(id);
+		Page<User> all = userDao.findAll(specification, PageRequest.of(pageNum - 1, pageSize));
+		map.put("page",all);
+		 map.put("focous", findfocous);
+		
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 		return map;
 		
 //		PageHelper.startPage(pageNum,pageSize);
 //		List<User> users = userTk.selectPage(userName);
 //		return  new PageInfo<>(users);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 	}
 	
 	@Override
@@ -141,6 +174,7 @@ public class UserServiceImpl implements UserService {
 		if ( map.get("newfocus").length==map.get("focusId").length&&Arrays.equals(map.get("newfocus"),map.get("focusId"))){
 			return 1;
 			}
+<<<<<<< HEAD
 		if (map.get("focusId").length!=0) {
 			userFocusTk.delBatch(map.get("focusId"),id);
 		}
@@ -148,6 +182,10 @@ public class UserServiceImpl implements UserService {
 				userFocusTk.insertBatch(map.get("newfocus"),id);
 			}
 
+=======
+		userFocusdao.delbyid(id);
+			userFocusTk.insertBatch(map.get("newfocus"),id);
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 		}
 		return 1;
 	}

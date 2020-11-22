@@ -72,7 +72,11 @@
 									</tr>
 								</thead>
 								<tbody>
+<<<<<<< HEAD
 									<tr v-for="user in page.list">
+=======
+									<tr v-for="user in page.content">
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 										<th scope="row">{{user.id}}</th>
 										<td>{{user.username}}</td>
 										<td>{{user.realName}}</td>
@@ -80,7 +84,11 @@
 										<td>{{user.age}}</td>
 										<td>{{user.info}}</td>
 										<td>
+<<<<<<< HEAD
 											<a href="myuser/detail"><input type="button" value="详细信息" class="btn-xs btn-primary userDetail" @click="toDetail(user)"></a>
+=======
+											<input type="submit" value="详细信息" class="btn-xs btn-primary userDetail">
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 										</td>
 
 										<td>
@@ -96,6 +104,7 @@
 
 							<nav class="text-center" aria-label="Page navigation">
 								<ul class="pagination">
+<<<<<<< HEAD
 									<ul class="pagination">
 										<li v-if="page.hasPreviousPage">
 											<a  style="cursor:default;" aria-label="Previous" @click="doUpdate(page.prePage,page.pageSize)">
@@ -118,6 +127,43 @@
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 										</li>
+=======
+                                    <li v-if="page.first">
+                                        <a style="cursor:pointer"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+									<li v-else>
+										<a style="cursor:pointer"
+                                           aria-label="Previous"
+                                           @click="doUpdate(page.number+1-1,page.size)">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+
+									<li :class="page.number+1==i?'active':''"
+                                        v-for="i in page.totalPages" >
+                                        <a style="cursor:pointer"
+                                           @click="selectAll(i,page.size)">{{i
+                                            }}</a>
+                                    </li>
+
+
+                                    <li v-if="page.last">
+                                        <a style="cursor:pointer"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+									<li v-else>
+										<a style="cursor:pointer"
+                                           aria-label="Next"
+                                           @click="doUpdate(page.number+1+1,page.size)">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 								</ul>
 							</nav>
 						</div>

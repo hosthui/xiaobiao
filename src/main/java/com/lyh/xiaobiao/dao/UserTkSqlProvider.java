@@ -1,5 +1,6 @@
 package com.lyh.xiaobiao.dao;
 
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.Param;
 import org.springframework.util.StringUtils;
 
@@ -88,6 +89,21 @@ public class UserTkSqlProvider {
 			buffer.append(" where username like CONCAT('%',#{username},'%') ");
 		}
 		buffer.append(" ORDER BY a.id ");
+=======
+import org.springframework.util.StringUtils;
+
+public class UserTkSqlProvider {
+	
+	public String pageSql(String username){
+		
+		/**
+		 * SELECT auser.*,GROUP_CONCAT(fuser.user_focus_id)  user_focus_id FROM user auser LEFT JOIN userfocus fuser on fuser.user_id=auser.id GROUP BY auser.id
+		 */
+		StringBuffer buffer = new StringBuffer(" SELECT auser.*,GROUP_CONCAT(fuser.user_focus_id)  user_focus_id FROM user auser LEFT JOIN userfocus fuser on fuser.user_id=auser.id GROUP BY auser.id ");
+		if ( !StringUtils.isEmpty(username) ){
+			buffer.append(" HAVING username like CONCAT('%',#{username},'%') ");
+		}
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 		return buffer.toString();
 	}
 }

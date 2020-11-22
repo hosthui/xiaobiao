@@ -15,6 +15,7 @@ let vm = new Vue({
                     let pages= response.data.data.page;
                     this.focusId=response.data.data.focous;
                     this.focusIds=[];
+<<<<<<< HEAD
                     for (let i = 0; i <pages.list.length; i++) {
                         for (let j = 0; j < this.focusId.length; j++) {
                             if (pages.list[i].id==this.focusId[j].userFocusId){
@@ -23,28 +24,68 @@ let vm = new Vue({
                                 break;
                             }else {
                                 pages.list[i].checke=false
+=======
+                    for (let i = 0; i <pages.content.length; i++) {
+                        for (let j = 0; j < this.focusId.length; j++) {
+                            if (pages.content[i].id==this.focusId[j].userFocusId){
+                                pages.content[i].checke=true
+                                this.focusIds.push(this.focusId[j].userFocusId);
+                                break;
+                            }else {
+                                pages.content[i].checke=false
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
                             }
                         }
                     }
                     this.page=pages
                 }
             ).catch(error => {
+<<<<<<< HEAD
                 console.log(error.message);
             })
         },
         toDetail: function (data) {
                 let JSONdata= JSON.stringify(data)
                 sessionStorage.setItem("usermsg",JSONdata);
+=======
+                // console.log(error.message);
+            })
+        },
+        addApp: function () {
+            this.actives = !this.actives
+            axios({
+                url: "manager/app/insert",
+                method: "post",
+                data: this.app
+            }).then(response => {
+                this.actives = !this.actives
+                layer.msg("添加成功")
+                this.selectAll()
+                this.app = {
+                    platform: "0",
+                    forceUpdate: "0"
+                }
+            }).catch(error => {
+                layer.msg(error.message)
+            })
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
         },
         doUpdate: function (pageNum,pageSize) {
             debugger;
 
             let newfocusId=[];
+<<<<<<< HEAD
             for (let i = 0; i <this.page.list.length; i++) {
                 if (this.page.list[i].checke == true) {
                     newfocusId.push(this.page.list[i].id)
                 }
             }
+=======
+            for (let i = 0; i <this.page.content.length; i++) {
+                if (this.page.content[i].checke==true){
+                    newfocusId.push(this.page.content[i].id)
+                }
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
                 axios({
                     url: "user/doupdate",
                     method: "put",
@@ -54,8 +95,33 @@ let vm = new Vue({
                 }).catch(error => {
                     layer.msg(error.message)
                 })
+<<<<<<< HEAD
 
 
+=======
+            }
+
+        },
+        toDel: function (app) {
+            app.delFlag = 1
+            layer.msg('确认删除', {
+                time: 20000, //20s后自动关闭
+                btn: ['确定', '取消'],
+                yes: () => {
+                    axios({
+                        url: "manager/app/update",
+                        method: "put",
+                        data: app
+                    }).then(response => {
+                        layer.msg(response.data.message)
+                        this.selectAll();
+                    }).catch(error => {
+                        layer.msg(error.message)
+                    })
+
+                }
+            });
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
         }
     },
     created: function () {

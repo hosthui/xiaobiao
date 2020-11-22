@@ -1,7 +1,11 @@
 package com.lyh.xiaobiao.dao;
 
 import com.lyh.xiaobiao.entity.Article;
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.*;
+=======
+import org.apache.ibatis.annotations.Select;
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -31,6 +35,7 @@ public interface ArticleTk extends Mapper<Article> {
 			" a left join (  select date(publish_date) as datetime, count(*) as count " +
 			"  from article " + "  group by date(publish_date) " + ") b on a.click_date = b.datetime;")
 	List<Map<String,Object>> SelectCount();
+<<<<<<< HEAD
 
 	@SelectProvider(type = ArticleTkSqlProvider.class,method = "selectPageSql")
 	 List<Article> selectPage(String articleName);
@@ -43,4 +48,6 @@ public interface ArticleTk extends Mapper<Article> {
 
 	@Insert(" INSERT INTO favorite VALUES(#{uid},#{aid}) ")
 	void insertfavorite(@Param("aid") String aid,@Param("uid")String uid);
+=======
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 }

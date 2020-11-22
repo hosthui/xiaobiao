@@ -1,8 +1,13 @@
 package com.lyh.xiaobiao.dao;
 
 import com.lyh.xiaobiao.entity.User;
+<<<<<<< HEAD
 import com.lyh.xiaobiao.entity.UserFocus;
 import org.apache.ibatis.annotations.*;
+=======
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
@@ -35,6 +40,7 @@ public interface UserTk extends Mapper<User> {
 			" a left join (  select date(register_time) as datetime, count(*) as count " +
 			"  from `user` " + "  group by date(register_time) " + ") b on a.click_date = b.datetime;")
 	List<Map<String,Object>> SelectCount();
+<<<<<<< HEAD
 
 
 	/**
@@ -69,4 +75,7 @@ public interface UserTk extends Mapper<User> {
 			") b ON b.bfid = a.id")
 	List<User> selctfaByaId(@Param("aid") Long aid,@Param("uid")Long uid);
 
+=======
+	
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 }

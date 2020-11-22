@@ -1,5 +1,6 @@
 package com.lyh.xiaobiao.service.impl;
 
+<<<<<<< HEAD
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyh.xiaobiao.dao.ArticleDao;
@@ -8,11 +9,20 @@ import com.lyh.xiaobiao.dao.UserTk;
 import com.lyh.xiaobiao.entity.Article;
 import com.lyh.xiaobiao.entity.Meeting;
 import com.lyh.xiaobiao.entity.User;
+=======
+import com.lyh.xiaobiao.dao.ArticleDao;
+import com.lyh.xiaobiao.dao.ArticleTk;
+import com.lyh.xiaobiao.entity.Article;
+import com.lyh.xiaobiao.entity.Meeting;
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 import com.lyh.xiaobiao.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import org.springframework.util.StringUtils;
+=======
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 
 import javax.persistence.criteria.*;
 import java.util.*;
@@ -26,10 +36,15 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Autowired
 	ArticleTk articleTk;
+<<<<<<< HEAD
 
 	@Autowired
 	UserTk userTk;
 
+=======
+	
+	
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 	@Override
 	public List<Long> countArticleByDate(){
 		List<Long> ArticleCount=new ArrayList<>();
@@ -44,6 +59,7 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return  ArticleCount;
 	}
+<<<<<<< HEAD
 	@Override
 	public PageInfo<Article> selectPage(int pageNum, int pageSize, String articleName){
 		PageHelper.startPage(pageNum,pageSize);
@@ -90,4 +106,6 @@ public class ArticleServiceImpl implements ArticleService {
 	public void addArt(Article article){
 		articleDao.save(article);
 	}
+=======
+>>>>>>> 18d2331206a5c8aee6ff2e2786ce072cde6d1b67
 }
